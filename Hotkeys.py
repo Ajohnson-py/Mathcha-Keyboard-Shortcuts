@@ -133,12 +133,21 @@ def cross_product():
     k.add(KeyCode(char='k'))
     mathbf(k)
 
-#makes a function f with the specified number of variables
+# makes a function f or the partial derivative of f with the specified number of variables
 def f(text):
-    keyboard.press(Key.backspace)
+    for key in text:
+        keyboard.press(Key.backspace)
     keyboard.press(KeyCode(char='f'))
+
+    # checks if partial derivative is wanted
+    if any([key == KeyCode(char='x') for key in text]):
+        keyboard.press(KeyCode(char='_'))
+        keyboard.press(KeyCode(char='x'))
+    elif any([key == KeyCode(char='y') for key in text]):
+        keyboard.press(KeyCode(char='_'))
+        keyboard.press(KeyCode(char='y'))
+
     keyboard.press(KeyCode(char='('))
-    print(text)
 
     if any([key == KeyCode(char='1') for key in text]):
         keyboard.press(KeyCode(char='x'))
