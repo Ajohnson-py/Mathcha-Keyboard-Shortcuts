@@ -146,6 +146,9 @@ def f(text):
     elif any([key == KeyCode(char='y') for key in text]):
         keyboard.press(KeyCode(char='_'))
         keyboard.press(KeyCode(char='y'))
+    elif any([key == KeyCode(char='z') for key in text]):
+        keyboard.press(KeyCode(char='_'))
+        keyboard.press(KeyCode(char='z'))
 
     keyboard.press(KeyCode(char='('))
 
