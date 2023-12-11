@@ -12,6 +12,8 @@ Shortcuts currently added:
 2. control + v (makes whatever you type have vector notation)
 3. control + m (creates a determinant for finding the cross product of 2 vectors)
 4. control + f (creates a function or the partial derivative of a function with the specified number of variables, 3 max)
+5. control + i (creates an integral symbol)
+6. control + o (creates a line integral symbol)
 
 How to use each shortcut:
 
@@ -25,4 +27,10 @@ control + m:
 After pressing control + m, a determinant will be created with i, j, and k on the top row. After it is created, fill it in.
 
 control + f:
-After pressing control + f, type x or y depending on what you want to do the partial derivative with respect to then type 1, 2, or 3 to indicate the number of variables the function is dependant on. To just create a regular function, type the number of variables the function is dependant on.
+After pressing control + f, type x or y, depending on what you want to do, the partial derivative with respect to, then type 1, 2, or 3 to indicate the number of variables the function is dependent on. To create a regular function, don't type x or y.
+
+control + i:
+After pressing control + i, an integral symbol will be created.
+
+control + o:
+After pressing control + i, a line integral symbol will be created.
