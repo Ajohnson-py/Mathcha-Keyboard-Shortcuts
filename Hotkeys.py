@@ -1,22 +1,25 @@
 import time
 from pynput.keyboard import Controller, Listener, Key, KeyCode
 
-
 text_start = False
 text_end = False
 bold = False
 vector = False
 function = False
+integral = False
 
 hotkeys = [
     {Key.ctrl, KeyCode(char='b')},
     {Key.ctrl, KeyCode(char='v')},
     {Key.ctrl, KeyCode(char='m')},
-    {Key.ctrl, KeyCode(char='f')}
+    {Key.ctrl, KeyCode(char='f')},
+    {Key.ctrl, KeyCode(char='i')},
+    {Key.ctrl, KeyCode(char='o')}
 ]
 
 keys_pressed = set()
 keyboard = Controller()
+
 
 # accesses the mathbf command
 def mathbf(text):
@@ -40,7 +43,7 @@ def mathbf(text):
     keyboard.press(Key.enter)
 
     # makes text no longer highlighted
-    time.sleep(0.2) 
+    time.sleep(0.2)
     keyboard.press(Key.shift)
     if len(text) == 0:
         for i in range(len(text) + 1):
@@ -50,6 +53,7 @@ def mathbf(text):
             keyboard.press(Key.right)
     keyboard.release(Key.shift)
     keys_pressed.discard(text)
+
 
 # accesses the vec command
 def vec(text):
@@ -74,7 +78,7 @@ def vec(text):
     keyboard.press(Key.enter)
 
     # makes text no longer highlighted
-    time.sleep(0.2) 
+    time.sleep(0.2)
     keyboard.press(Key.shift)
     if len(text) == 0:
         for i in range(len(text) + 1):
@@ -85,26 +89,27 @@ def vec(text):
     keyboard.release(Key.shift)
     keys_pressed.discard(text)
 
+
 # makes a vmatrix and writes i, j and k on top row
 def cross_product():
     command = "vmatrix"
 
     # gets matrix
     keyboard.press('\\')
-    time.sleep(0.2) 
+    time.sleep(0.2)
     for letter in command:
         keyboard.press(letter)
     keyboard.press(Key.enter)
 
-    #formats matrix
+    # formats matrix
     keyboard.press(Key.enter)
-    time.sleep(0.2) 
+    time.sleep(0.2)
     keyboard.press(Key.right)
-    time.sleep(0.2) 
+    time.sleep(0.2)
     keyboard.press(Key.enter)
-    time.sleep(0.2) 
+    time.sleep(0.2)
     keyboard.press(Key.enter)
-    time.sleep(0.2) 
+    time.sleep(0.2)
     keyboard.press(Key.enter)
 
     # fills in i, j, and k
@@ -132,6 +137,7 @@ def cross_product():
     k = set()
     k.add(KeyCode(char='k'))
     mathbf(k)
+
 
 # makes a function f or the partial derivative of f with the specified number of variables
 def f(text):
@@ -171,12 +177,34 @@ def f(text):
         keyboard.press(KeyCode(char=')'))
         keyboard.press(KeyCode(char='='))
 
+
+def int():
+    keyboard.press('\\')
+    time.sleep(0.1)
+    keyboard.press(KeyCode(char='i'))
+    keyboard.press(KeyCode(char='n'))
+    keyboard.press(KeyCode(char='t'))
+    keyboard.press(Key.enter)
+
+
+def oint():
+    #keyboard.press(Key.backspace)
+    keyboard.press('\\')
+    time.sleep(0.1)
+    keyboard.press(KeyCode(char='o'))
+    keyboard.press(KeyCode(char='i'))
+    keyboard.press(KeyCode(char='n'))
+    keyboard.press(KeyCode(char='t'))
+    keyboard.press(Key.enter)
+
+
 def get_text():
     for combo in keys_pressed.copy():
         if combo == Key.shift or combo == Key.shift_r or combo == Key.enter:
-                keys_pressed.discard(combo)
+            keys_pressed.discard(combo)
 
     return keys_pressed
+
 
 def execute(key):
     global text_start
@@ -184,29 +212,33 @@ def execute(key):
     global bold
     global vector
     global function
+    global integral
 
-    if text_start == True:
+    if text_start:
         for combo in keys_pressed:
             if combo == Key.enter:
                 text_end = True
                 break
 
-        if text_end == True:
+        if text_end:
             text = get_text()
             keyboard.press(Key.backspace)
             time.sleep(0.1)
-            if bold == True:
+            if bold:
                 mathbf(text)
-            elif vector == True:
+            elif vector:
                 vec(text)
+            elif integral:
+                int(text)
             else:
                 f(text)
             text_end = False
             text_start = False
             bold = False
             vector = False
+            integral = False
             function = False
-            keys_pressed.clear() # here because of bug when using a hotkey multiple times. Find better fix
+            keys_pressed.clear()  # here because of bug when using a hotkey multiple times. Find better fix
 
     if key == KeyCode(char='b') or key == KeyCode(char='v') or key == KeyCode(char='f'):
         text_start = True
@@ -214,15 +246,21 @@ def execute(key):
             bold = True
         elif key == KeyCode(char='v'):
             vector = True
+        elif key == KeyCode(char='i'):
+            integral = True
         else:
             function = True
-    
+
+    if key == KeyCode(char='i'):
+        int()
     if key == KeyCode(char='m'):
         cross_product()
-                
+    if key == KeyCode(char='o'):
+        oint()
+
 
 def on_press(key):
-    if text_start == True:
+    if text_start:
         keys_pressed.add(key)
         execute(key)
 
@@ -231,8 +269,9 @@ def on_press(key):
         if any(all(k in keys_pressed for k in combo) for combo in hotkeys):
             execute(key)
 
+
 def off_press(key):
-    if text_start == True:
+    if text_start:
         pass
 
     if any([key in combo for combo in hotkeys]):
