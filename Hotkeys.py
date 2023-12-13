@@ -188,7 +188,7 @@ def int():
 
 
 def oint():
-    #keyboard.press(Key.backspace)
+    # keyboard.press(Key.backspace)
     keyboard.press('\\')
     time.sleep(0.1)
     keyboard.press(KeyCode(char='o'))
@@ -228,8 +228,6 @@ def execute(key):
                 mathbf(text)
             elif vector:
                 vec(text)
-            elif integral:
-                int(text)
             else:
                 f(text)
             text_end = False
@@ -246,16 +244,14 @@ def execute(key):
             bold = True
         elif key == KeyCode(char='v'):
             vector = True
-        elif key == KeyCode(char='i'):
-            integral = True
         else:
             function = True
 
-    if key == KeyCode(char='i'):
+    if key == KeyCode(char='i') and text_start == False:
         int()
-    if key == KeyCode(char='m'):
+    if key == KeyCode(char='m') and text_start == False:
         cross_product()
-    if key == KeyCode(char='o'):
+    if key == KeyCode(char='o') and text_start == False:
         oint()
 
 
