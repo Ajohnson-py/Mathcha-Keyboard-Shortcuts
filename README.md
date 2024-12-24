@@ -1,5 +1,5 @@
 # Mathcha-Keyboard-Shortcuts
-This script is meant to add more hotkey functions to Mathcha. If you are someone who is disabled and uses Mathcha, please reach out to me, and I'll add hotkeys to better suit your needs.
+This script is meant to add more hotkey functions to Mathcha. If you use Mathcha for accessibility purposes but feel this script doesn't add enough functionality, please contact me, and I'll add hotkeys to better suit your needs.
 
 My email is augustjohnson.py@gmail.com
 
@@ -10,7 +10,7 @@ Please note that this project is still under development, and hotkeys will be ad
 Shortcuts currently added:
 1. control + b (makes whatever you type bold)
 2. control + v (makes whatever you type have vector notation)
-3. control + m (creates a determinant for finding the cross product of 2 vectors)
+3. control + m (creates a determinant for finding the cross product of 2 3D vectors)
 4. control + f (creates a function or the partial derivative of a function with the specified number of variables, 3 max)
 5. control + i (creates an integral symbol)
 6. control + o (creates a line integral symbol)
