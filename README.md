@@ -7,15 +7,15 @@ To see the website it is intended for, go to https://www.mathcha.io
 
 Please note that this project is still under development, and hotkeys will be added as I feel needed.
 
-Shortcuts currently added:
+# Shortcuts currently added
 1. control + b (makes whatever you type bold)
 2. control + v (makes whatever you type have vector notation)
-3. control + m (creates a determinant for finding the cross product of 2 3D vectors)
+3. control + m (creates a determinant for finding the cross product of two 3D vectors)
 4. control + f (creates a function or the partial derivative of a function with the specified number of variables, 3 max)
 5. control + i (creates an integral symbol)
 6. control + o (creates a line integral symbol)
 
-How to use each shortcut:
+# How to use each shortcut
 
 control + b:
 After pressing control + b, type what you want to be bold and then hit enter.
@@ -33,4 +33,4 @@ control + i:
 After pressing control + i, an integral symbol will be created.
 
 control + o:
-After pressing control + i, a line integral symbol will be created.
+After pressing control + o, a line integral symbol will be created.
