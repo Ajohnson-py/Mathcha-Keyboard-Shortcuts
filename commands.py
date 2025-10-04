@@ -40,7 +40,6 @@ def mathbf(text):
     time.sleep(0.15)
 
     # Unselect the text
-    print(len(text))
     unselect_text(len(text))
 
 
@@ -155,4 +154,3 @@ def integral():
 
 def oint():
     type_command("oint")
-  
